@@ -27,32 +27,27 @@ export default function ProductCard({ product }) {
   }
 
   return (
-    <div className="card h-100 shadow-sm border-0">
-      <div
-        className="card-img-top d-flex align-items-center justify-content-center bg-light"
-        style={{ height: 200, overflow: "hidden" }}
-      >
+    <div className="card h-100 product-card">
+      <div className="product-image d-flex align-items-center justify-content-center mb-3">
         {product.thumbnail ? (
-          <img
-            src={product.thumbnail}
-            alt={product.title}
-            style={{ maxHeight: "100%", objectFit: "contain" }}
-          />
+          <img src={product.thumbnail} alt={product.title} />
         ) : (
-          <span className="text-muted fs-1"></span>
+          <span className="text-muted fs-1">?</span>
         )}
       </div>
 
       <div className="card-body d-flex flex-column">
-        <h6 className="card-title fw-bold mb-3 text-truncate">{product.title}</h6>
+        <h6 className="card-title fw-bold mb-2 text-truncate">
+          {product.title}
+        </h6>
 
-        <div className="mb-3">
-          <span className="fw-bold text-success fs-5">
+        <div className="mb-4">
+          <span className="fw-bold text-primary fs-5">
             ${Number(product.price || 0).toFixed(2)}
           </span>
         </div>
 
-        <div className="mt-auto d-flex gap-2">
+        <div className="mt-auto d-flex gap-2 flex-wrap">
           <Link
             href={`/products/${product._id}`}
             className="btn btn-outline-primary btn-sm flex-grow-1"
@@ -76,7 +71,7 @@ export default function ProductCard({ product }) {
                 {deleting ? (
                   <span className="spinner-border spinner-border-sm" />
                 ) : (
-                  "Del"
+                  "Delete"
                 )}
               </button>
             </>

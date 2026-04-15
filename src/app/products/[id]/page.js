@@ -45,7 +45,7 @@ export default async function ProductDetailPage({ params }) {
           </li>
           <li
             className="breadcrumb-item active text-truncate"
-            style={{ maxWidth: 200 }}
+            style={{ maxWidth: 220 }}
           >
             {product.title}
           </li>
@@ -54,10 +54,7 @@ export default async function ProductDetailPage({ params }) {
 
       <div className="row g-5">
         <div className="col-md-5">
-          <div
-            className="bg-light rounded d-flex align-items-center justify-content-center mb-3 border"
-            style={{ height: 320 }}
-          >
+          <div className="card card-body rounded-4 shadow-sm mb-3" style={{ height: 340, display: 'grid', placeItems: 'center' }}>
             {product.thumbnail ? (
               <img
                 src={product.thumbnail}
@@ -69,38 +66,40 @@ export default async function ProductDetailPage({ params }) {
                 }}
               />
             ) : (
-              <span className="fs-1"></span>
+              <span className="fs-1 text-muted">?</span>
             )}
           </div>
         </div>
 
         <div className="col-md-7">
-          <h1 className="fw-bold h2 mb-3">{product.title}</h1>
+          <div className="card card-body rounded-4 shadow-sm border-0">
+            <h1 className="fw-bold h2 mb-3">{product.title}</h1>
 
-          <div className="my-4">
-            <h2 className="text-success fw-bold mb-0">
-              ${Number(product.price || 0).toFixed(2)}
-            </h2>
-            <p className="text-muted mt-2 mb-0">
-              This product stores only the title, price, and image.
-            </p>
-          </div>
+            <div className="my-4">
+              <h2 className="text-primary fw-bold mb-0">
+                ${Number(product.price || 0).toFixed(2)}
+              </h2>
+              <p className="text-muted mt-2 mb-0">
+                This product stores only the title, price, and image.
+              </p>
+            </div>
 
-          <div className="d-flex gap-2 flex-wrap">
-            <Link href="/products" className="btn btn-outline-secondary">
-              Back to Products
-            </Link>
-            {session && (
-              <>
-                <Link
-                  href={`/products/${product._id}/edit`}
-                  className="btn btn-warning"
-                >
-                 Edit
-                </Link>
-                <DeleteButton productId={product._id.toString()} />
-              </>
-            )}
+            <div className="d-flex gap-2 flex-wrap">
+              <Link href="/products" className="btn btn-outline-secondary">
+                Back to Products
+              </Link>
+              {session && (
+                <>
+                  <Link
+                    href={`/products/${product._id}/edit`}
+                    className="btn btn-primary"
+                  >
+                    Edit
+                  </Link>
+                  <DeleteButton productId={product._id.toString()} />
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

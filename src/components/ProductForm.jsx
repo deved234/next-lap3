@@ -83,7 +83,10 @@ export default function ProductForm({ initialData = null, productId = null }) {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form
+      onSubmit={handleSubmit}
+      className="card card-body shadow-sm rounded-4 border-0"
+    >
       {error && (
         <div className="alert alert-danger" role="alert">
           {error}
@@ -137,13 +140,13 @@ export default function ProductForm({ initialData = null, productId = null }) {
             <img
               src={form.thumbnail}
               alt="preview"
-              className="mt-2 rounded border"
+              className="mt-2 rounded-4 border"
               style={{ maxHeight: 120, objectFit: "contain" }}
             />
           )}
         </div>
 
-        <div className="col-12 d-flex gap-2">
+        <div className="col-12 d-flex flex-wrap gap-2">
           <button type="submit" className="btn btn-primary" disabled={loading}>
             {loading ? (
               <>
@@ -151,9 +154,9 @@ export default function ProductForm({ initialData = null, productId = null }) {
                 {isEdit ? "Saving..." : "Adding..."}
               </>
             ) : isEdit ? (
-              " Save Changes"
+              "Save Changes"
             ) : (
-              " Add Product"
+              "Add Product"
             )}
           </button>
           <button

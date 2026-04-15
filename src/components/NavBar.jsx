@@ -10,10 +10,10 @@ export default function NavBar() {
   const isActive = (href) => pathname === href;
 
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+    <nav className="navbar navbar-expand-lg navbar-glass sticky-top">
       <div className="container">
         <Link className="navbar-brand fw-bold" href="/">
-           Electronia
+          Electronia
         </Link>
 
         <button
@@ -26,7 +26,6 @@ export default function NavBar() {
         </button>
 
         <div className="collapse navbar-collapse" id="navbarMain">
-          {/* Left links */}
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item">
               <Link
@@ -56,10 +55,9 @@ export default function NavBar() {
             )}
           </ul>
 
-          {/* Right — Auth */}
           <div className="d-flex align-items-center gap-3">
             {status === "loading" ? (
-              <div className="spinner-border spinner-border-sm text-light" />
+              <div className="spinner-border spinner-border-sm text-primary" />
             ) : session ? (
               <>
                 <div className="d-flex align-items-center gap-2">
@@ -69,13 +67,14 @@ export default function NavBar() {
                       alt={session.user.name}
                       width={32}
                       height={32}
-                      className="rounded-circle border border-light"
+                      className="rounded-circle border border-2"
+                      style={{ borderColor: "rgba(79, 70, 229, 0.24)" }}
                     />
                   )}
-                  <span className="text-light small">{session.user?.name}</span>
+                  <span className="small text-muted">{session.user?.name}</span>
                 </div>
                 <button
-                  className="btn btn-outline-light btn-sm"
+                  className="btn btn-outline-primary btn-sm"
                   onClick={() => signOut()}
                 >
                   Sign out

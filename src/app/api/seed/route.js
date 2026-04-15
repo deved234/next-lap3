@@ -14,27 +14,19 @@ export async function GET() {
       });
     }
 
-    const res = await fetch("https://dummyjson.com/products?limit=194");
-    const data = await res.json();
+    const products = await Product.find().sort({ createdAt: -1 });
 
-    if (!data.products || data.products.length === 0) {
+    if (!products || products.length === 0) {
       return NextResponse.json(
-        { error: "No products returned from dummyjson" },
-        { status: 500 }
+        { message: "No products found in MongoDB Atlas. Please seed your database first." },
+        { status: 404 }
       );
     }
 
-    const cleaned = data.products.map((product) => ({
-      title: product.title,
-      price: product.price,
-      thumbnail: product.thumbnail || product.images?.[0] || "",
-    }));
-
-    const inserted = await Product.insertMany(cleaned, { ordered: false });
-
     return NextResponse.json({
-      message: `âœ… Successfully seeded ${inserted.length} products into MongoDB!`,
-      count: inserted.length,
+      message: `Fetched ${products.length} products from MongoDB Atlas.`,
+      count: products.length,
+      products,
     });
   } catch (error) {
     console.error("Seed error:", error);

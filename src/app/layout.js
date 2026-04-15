@@ -16,7 +16,7 @@ export default function RootLayout({ children }) {
         <AuthSessionProvider>
           <NavBar />
           <BootstrapClient />
-          <main className="container py-4">{children}</main>
+          <main className="container py-5">{children}</main>
         </AuthSessionProvider>
       </body>
     </html>

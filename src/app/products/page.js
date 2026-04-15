@@ -30,9 +30,10 @@ export default async function ProductsPage({ searchParams }) {
   return (
     <div>
       <div className="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
-        <h2 className="fw-bold mb-0">
-          Products <span className="badge bg-secondary fs-6">{total}</span>
-        </h2>
+        <div>
+          <h2 className="fw-bold mb-1">Products</h2>
+          <p className="text-muted mb-0">Browse, search, and manage your catalog.</p>
+        </div>
         {session && (
           <Link href="/products/add" className="btn btn-primary">
             + Add Product
@@ -40,32 +41,34 @@ export default async function ProductsPage({ searchParams }) {
         )}
       </div>
 
-      <form className="mb-4">
-        <div className="row g-2">
-          <div className="col-sm-9 col-md-10">
-            <input
-              type="text"
-              name="search"
-              className="form-control"
-              placeholder="Search by title..."
-              defaultValue={search}
-            />
+      <div className="card border-0 shadow-sm mb-4 p-3">
+        <form>
+          <div className="row g-2 align-items-center">
+            <div className="col-sm-9 col-md-10">
+              <input
+                type="text"
+                name="search"
+                className="form-control"
+                placeholder="Search by title..."
+                defaultValue={search}
+              />
+            </div>
+            <div className="col-sm-3 col-md-2">
+              <button className="btn btn-primary w-100" type="submit">
+                Search
+              </button>
+            </div>
           </div>
-          <div className="col-sm-3 col-md-2">
-            <button className="btn btn-outline-primary w-100" type="submit">
-              Search
-            </button>
-          </div>
-        </div>
-      </form>
+        </form>
+      </div>
 
       {products.length === 0 ? (
         <div className="text-center py-5 text-muted">
-          <div className="fs-1 mb-3">ðŸ“¦</div>
+          <div className="fs-1 mb-3">📦</div>
           <p className="fs-5">No products found.</p>
           {total === 0 && (
-            <a href="/api/seed" className="btn btn-warning">
-              Seed Database from dummyjson
+            <a href="/api/seed" className="btn btn-outline-primary">
+              Seed Database
             </a>
           )}
         </div>
@@ -87,7 +90,7 @@ export default async function ProductsPage({ searchParams }) {
                 className="page-link"
                 href={`/products?page=${page - 1}&search=${search}`}
               >
-                â€¹ Prev
+                ‹ Prev
               </Link>
             </li>
 
@@ -107,12 +110,12 @@ export default async function ProductsPage({ searchParams }) {
                 className="page-link"
                 href={`/products?page=${page + 1}&search=${search}`}
               >
-                Next 
+                Next
               </Link>
             </li>
           </ul>
           <p className="text-center text-muted small mt-2">
-            Page {page} of {totalPages} â€” {total} products total
+            Page {page} of {totalPages} — {total} products total
           </p>
         </nav>
       )}
